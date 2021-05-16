@@ -1,0 +1,44 @@
+
+/*Description: Given the root of a binary tree, return the inorder traversal of its nodes' values.
+
+//runtime: 0ms, (faster than 100% of submissions)
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> inorderVect;
+        
+        if(root==nullptr){
+            return inorderVect;
+        }
+        
+        vector<int> leftVect;
+        vector<int> rightVect;
+        if(root->left!=nullptr){
+            leftVect=(inorderTraversal(root->left));
+        }
+        for(int i=0;i<leftVect.size();i++){
+            inorderVect.push_back(leftVect.at(i));
+        }
+        inorderVect.push_back(root->val);
+        if(root->right!=nullptr){
+            rightVect=(inorderTraversal(root->right));
+        }
+        for(int i=0;i<rightVect.size();i++){
+            inorderVect.push_back(rightVect.at(i));
+        }
+        return inorderVect;
+    }
+};
